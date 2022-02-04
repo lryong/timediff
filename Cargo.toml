@@ -1,8 +1,20 @@
 [package]
 name = "timediff"
+description = """
+    🦀 Rust library for printing human readable, relative time differences 🕰️
+"""
+license = "MIT"
+keywords = ["time", "parser", "duration", "diff", "datetime"]
+homepage = "https://github.com/lryong/timediff"
+repository = "https://github.com/lryong/timediff"
+authors = ["Herbert Lu <15816537946@163.com>"]
 version = "0.1.0"
 edition = "2021"
+categories = ["date-and-time"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "timediff"
+path = "src/lib.rs"
 
 [dependencies]
