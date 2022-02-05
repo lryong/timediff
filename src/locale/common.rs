@@ -1,6 +1,6 @@
 use humantime::DurationError;
-use std::time::Duration;
 
+#[derive(Debug)]
 pub enum Locales {
     ZHLocale,
     RULocale,

@@ -9,7 +9,8 @@ pub enum Error {
     NotFoundLocale(String),
 }
 
-struct TimeDiff {
+#[derive(Debug)]
+pub struct TimeDiff {
     // locale is the locale string used by time_diff function.
     locale: common::Locales,
 
@@ -19,7 +20,7 @@ struct TimeDiff {
 }
 
 impl TimeDiff {
-    fn to_diff(to: String) -> Self {
+    pub fn to_diff(to: String) -> Self {
         TimeDiff {
             locale: common::Locales::ZHLocale,
             overflow: false,
@@ -27,7 +28,7 @@ impl TimeDiff {
         }
     }
 
-    fn locale(&mut self, l: String) -> Result<(), Error> {
+    pub fn locale(&mut self, l: String) -> Result<(), Error> {
         match l.as_str() {
             "zh-CN" => self.locale = common::Locales::ZHLocale,
             "ru-RU" => self.locale = common::Locales::RULocale,
@@ -38,7 +39,7 @@ impl TimeDiff {
         Ok(())
     }
 
-    fn parse(&mut self) -> Result<String, DurationError> {
+    pub fn parse(&mut self) -> Result<String, DurationError> {
         let c = self.to.find("-").unwrap_or(self.to.len());
         if c == 0 {
             self.overflow = true;

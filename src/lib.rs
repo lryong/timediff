@@ -12,6 +12,10 @@
 
 mod locale;
 mod timediff;
+
+pub use self::locale::common::Formatter;
+pub use self::timediff::TimeDiff;
+
 #[cfg(test)]
 mod tests {
     #[test]
