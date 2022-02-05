@@ -12,7 +12,7 @@ pub enum Error {
 #[derive(Debug)]
 pub struct TimeDiff {
     // locale is the locale string used by time_diff function.
-    locale: common::Locales,
+    locale: String,
 
     overflow: bool,
 
@@ -22,7 +22,7 @@ pub struct TimeDiff {
 impl TimeDiff {
     pub fn to_diff(to: String) -> Self {
         TimeDiff {
-            locale: common::Locales::ZHLocale,
+            locale: String::from("zh-CN"),
             overflow: false,
             to,
         }
@@ -30,9 +30,7 @@ impl TimeDiff {
 
     pub fn locale(&mut self, l: String) -> Result<(), Error> {
         match l.as_str() {
-            "zh-CN" => self.locale = common::Locales::ZHLocale,
-            "ru-RU" => self.locale = common::Locales::RULocale,
-            "tr-TR" => self.locale = common::Locales::TRLocale,
+            "zh-CN" | "ru-RU" | "tr-TR" => self.locale = l,
             _ => return Err(Error::NotFoundLocale(l)),
         }
 
@@ -46,6 +44,13 @@ impl TimeDiff {
             self.to = self.to[1..].to_string();
         }
 
-        self.locale.format_duration(self.overflow, &self.to)
+        match self.locale.as_str() {
+            "zh-CN" => return zh_cn::format_duration(self.overflow, &self.to),
+            "tr-TR" => return tr_tr::format_duration(self.overflow, &self.to),
+            "ru-RU" => return ru_ru::format_duration(self.overflow, &self.to),
+
+            _ => return zh_cn::format_duration(self.overflow, &self.to),
+        }
+        // self.locale.format(self.overflow, &self.to)
     }
 }
