@@ -21,7 +21,7 @@ impl fmt::Display for Error {
 
 impl StdError for Error {}
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub struct TimeDiff {
     // locale is the locale string used by time_diff function.
     locale: String,
@@ -48,13 +48,13 @@ impl TimeDiff {
         }
     }
 
-    pub fn locale(&mut self, l: String) -> Result<(), Error> {
+    pub fn locale(&mut self, l: String) -> Result<&mut Self, Error> {
         match l.as_str() {
             "zh-CN" | "ru-RU" | "tr-TR" => self.locale = l,
             _ => return Err(Error::NotFoundLocale(l)),
         }
 
-        Ok(())
+        Ok(self)
     }
 
     pub fn parse(&mut self) -> Result<String, DurationError> {
