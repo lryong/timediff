@@ -1,7 +1,10 @@
 use humantime::{self, DurationError};
 
-pub fn format_duration(overflow: bool, duration_str: &String) -> Result<String, DurationError> {
-    if overflow {
+pub fn format_duration(
+    before_current_ts: bool,
+    duration_str: &String,
+) -> Result<String, DurationError> {
+    if before_current_ts {
         match humantime::parse_duration(duration_str) {
             Ok(v) => match v.as_secs() {
                 x if x < 44 => {
