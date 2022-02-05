@@ -34,7 +34,7 @@ pub struct TimeDiff {
 impl TimeDiff {
     pub fn to_diff(to: String) -> Self {
         TimeDiff {
-            locale: String::from("zh-CN"),
+            locale: String::from("en-US"),
             before_current_ts: false,
             to,
         }
@@ -42,7 +42,7 @@ impl TimeDiff {
 
     pub fn to_diff_duration(to: Duration) -> Self {
         TimeDiff {
-            locale: String::from("zh-CN"),
+            locale: String::from("en-US"),
             before_current_ts: false,
             to: humantime::format_duration(to).to_string(),
         }
@@ -50,7 +50,7 @@ impl TimeDiff {
 
     pub fn locale(&mut self, l: String) -> Result<&mut Self, Error> {
         match l.as_str() {
-            "zh-CN" | "ru-RU" | "tr-TR" => self.locale = l,
+            "zh-CN" | "ru-RU" | "tr-TR" | "en-US" => self.locale = l,
             _ => return Err(Error::NotFoundLocale(l)),
         }
 
@@ -68,8 +68,9 @@ impl TimeDiff {
             "zh-CN" => return zh_cn::format_duration(self.before_current_ts, &self.to),
             "tr-TR" => return tr_tr::format_duration(self.before_current_ts, &self.to),
             "ru-RU" => return ru_ru::format_duration(self.before_current_ts, &self.to),
+            "en-US" => return en_us::format_duration(self.before_current_ts, &self.to),
 
-            _ => return zh_cn::format_duration(self.before_current_ts, &self.to),
+            _ => return en_us::format_duration(self.before_current_ts, &self.to),
         }
     }
 }
@@ -83,7 +84,10 @@ mod tests {
     #[allow(clippy::cognitive_complexity)]
     fn it_works_zh_cn() {
         assert_eq!(
-            TimeDiff::to_diff(String::from("-10s")).parse(),
+            TimeDiff::to_diff(String::from("-10s"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("几秒前"))
         );
     }

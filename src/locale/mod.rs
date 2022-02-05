@@ -1,5 +1,5 @@
 mod de_de;
-mod en_us;
+pub mod en_us;
 mod es_mx;
 mod hi_in;
 mod pt_br;

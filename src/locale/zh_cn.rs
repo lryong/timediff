@@ -103,308 +103,536 @@ mod tests {
     #[allow(clippy::cognitive_complexity)]
     fn test_units() {
         assert_eq!(
-            TimeDiff::to_diff(String::from("-10s")).parse(),
+            TimeDiff::to_diff(String::from("-10s"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("几秒前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-44s")).parse(),
+            TimeDiff::to_diff(String::from("-44s"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("几秒前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-45s")).parse(),
+            TimeDiff::to_diff(String::from("-45s"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1分钟前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-89s")).parse(), // t: 1分钟前
+            TimeDiff::to_diff(String::from("-89s"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1分钟前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-90s")).parse(),
+            TimeDiff::to_diff(String::from("-90s"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("2分钟前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-91s")).parse(),
+            TimeDiff::to_diff(String::from("-91s"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("2分钟前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-2m")).parse(),
+            TimeDiff::to_diff(String::from("-2m"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("2分钟前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-10m")).parse(),
+            TimeDiff::to_diff(String::from("-10m"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("10分钟前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-44m")).parse(),
+            TimeDiff::to_diff(String::from("-44m"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("44分钟前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-45m")).parse(),
+            TimeDiff::to_diff(String::from("-45m"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1小时前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-60m")).parse(),
+            TimeDiff::to_diff(String::from("-60m"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1小时前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-1h")).parse(),
+            TimeDiff::to_diff(String::from("-1h"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1小时前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-80m")).parse(),
+            TimeDiff::to_diff(String::from("-80m"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1小时前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-89m")).parse(),
+            TimeDiff::to_diff(String::from("-89m"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1小时前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-90m")).parse(),
+            TimeDiff::to_diff(String::from("-90m"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("2小时前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-2h")).parse(),
+            TimeDiff::to_diff(String::from("-2h"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("2小时前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-20h")).parse(),
+            TimeDiff::to_diff(String::from("-20h"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("20小时前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-21h")).parse(),
+            TimeDiff::to_diff(String::from("-21h"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("21小时前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-21h30m")).parse(),
+            TimeDiff::to_diff(String::from("-21h30m"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1天前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-22h")).parse(),
+            TimeDiff::to_diff(String::from("-22h"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1天前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-24h")).parse(),
+            TimeDiff::to_diff(String::from("-24h"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1天前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-24h30m")).parse(),
+            TimeDiff::to_diff(String::from("-24h30m"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1天前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-34h59m")).parse(),
+            TimeDiff::to_diff(String::from("-34h59m"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1天前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-36h")).parse(),
+            TimeDiff::to_diff(String::from("-36h"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("2天前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-10d")).parse(),
+            TimeDiff::to_diff(String::from("-10d"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("10天前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-25d")).parse(),
+            TimeDiff::to_diff(String::from("-25d"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("25天前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-26d")).parse(),
+            TimeDiff::to_diff(String::from("-26d"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1个月前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-45d")).parse(),
+            TimeDiff::to_diff(String::from("-45d"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1个月前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-45d2m")).parse(),
+            TimeDiff::to_diff(String::from("-45d2m"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("2个月前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-46d")).parse(),
+            TimeDiff::to_diff(String::from("-46d"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("2个月前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-80d")).parse(),
+            TimeDiff::to_diff(String::from("-80d"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("3个月前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-9M")).parse(),
+            TimeDiff::to_diff(String::from("-9M"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("9个月前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-10M")).parse(),
+            TimeDiff::to_diff(String::from("-10M"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1年前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-10M1m")).parse(),
+            TimeDiff::to_diff(String::from("-10M1m"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1年前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-12M")).parse(),
+            TimeDiff::to_diff(String::from("-12M"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1年前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-17M")).parse(),
+            TimeDiff::to_diff(String::from("-17M"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1年前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-24M")).parse(),
+            TimeDiff::to_diff(String::from("-24M"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("2年前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-20y")).parse(),
+            TimeDiff::to_diff(String::from("-20y"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("20年前"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("-100y")).parse(),
+            TimeDiff::to_diff(String::from("-100y"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("101年前"))
         );
 
         assert_eq!(
-            TimeDiff::to_diff(String::from("10s")).parse(),
+            TimeDiff::to_diff(String::from("10s"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("几秒后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("44s")).parse(),
+            TimeDiff::to_diff(String::from("44s"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("几秒后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("45s")).parse(),
+            TimeDiff::to_diff(String::from("45s"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1分钟后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("89s")).parse(),
+            TimeDiff::to_diff(String::from("89s"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1分钟后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("90s")).parse(),
+            TimeDiff::to_diff(String::from("90s"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("2分钟后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("2m")).parse(),
+            TimeDiff::to_diff(String::from("2m"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("2分钟后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("10m")).parse(),
+            TimeDiff::to_diff(String::from("10m"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("10分钟后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("44m")).parse(),
+            TimeDiff::to_diff(String::from("44m"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("44分钟后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("45m")).parse(),
+            TimeDiff::to_diff(String::from("45m"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1小时后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("60m")).parse(),
+            TimeDiff::to_diff(String::from("60m"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1小时后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("1h")).parse(),
+            TimeDiff::to_diff(String::from("1h"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1小时后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("80m")).parse(),
+            TimeDiff::to_diff(String::from("80m"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1小时后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("89m")).parse(),
+            TimeDiff::to_diff(String::from("89m"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1小时后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("89m10s")).parse(),
+            TimeDiff::to_diff(String::from("89m10s"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("2小时后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("90m")).parse(),
+            TimeDiff::to_diff(String::from("90m"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("2小时后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("2h")).parse(),
+            TimeDiff::to_diff(String::from("2h"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("2小时后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("20h")).parse(),
+            TimeDiff::to_diff(String::from("20h"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("20小时后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("21h")).parse(),
+            TimeDiff::to_diff(String::from("21h"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("21小时后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("21h30m")).parse(),
+            TimeDiff::to_diff(String::from("21h30m"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1天后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("22h")).parse(),
+            TimeDiff::to_diff(String::from("22h"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1天后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("24h")).parse(),
+            TimeDiff::to_diff(String::from("24h"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1天后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("35h10m")).parse(),
+            TimeDiff::to_diff(String::from("35h10m"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("2天后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("36h")).parse(),
+            TimeDiff::to_diff(String::from("36h"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("2天后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("10d")).parse(),
+            TimeDiff::to_diff(String::from("10d"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("10天后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("25d")).parse(),
+            TimeDiff::to_diff(String::from("25d"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("25天后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("26d")).parse(),
+            TimeDiff::to_diff(String::from("26d"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1个月后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("45d")).parse(),
+            TimeDiff::to_diff(String::from("45d"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1个月后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("45d1m")).parse(),
+            TimeDiff::to_diff(String::from("45d1m"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("2个月后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("46d")).parse(),
+            TimeDiff::to_diff(String::from("46d"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("2个月后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("80d")).parse(),
+            TimeDiff::to_diff(String::from("80d"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("3个月后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("9M")).parse(),
+            TimeDiff::to_diff(String::from("9M"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("9个月后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("10M")).parse(),
+            TimeDiff::to_diff(String::from("10M"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1年后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("10M1m")).parse(),
+            TimeDiff::to_diff(String::from("10M1m"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1年后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("12M")).parse(),
+            TimeDiff::to_diff(String::from("12M"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("1年后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("24M")).parse(),
+            TimeDiff::to_diff(String::from("24M"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("2年后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("20y")).parse(),
+            TimeDiff::to_diff(String::from("20y"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("20年后"))
         );
         assert_eq!(
-            TimeDiff::to_diff(String::from("100y")).parse(),
+            TimeDiff::to_diff(String::from("100y"))
+                .locale(String::from("zh-CN"))
+                .unwrap()
+                .parse(),
             Ok(String::from("101年后"))
         );
     }
