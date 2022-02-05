@@ -79,9 +79,28 @@ impl TimeDiff {
 mod tests {
     use super::Error;
     use super::TimeDiff;
+    use std::time::Duration;
 
     #[test]
-    #[allow(clippy::cognitive_complexity)]
+    fn it_works_default_locale() {
+        assert_eq!(
+            TimeDiff::to_diff(String::from("-10s")).parse(),
+            Ok(String::from("a few seconds ago"))
+        )
+    }
+
+    #[test]
+    fn it_works_en_us() {
+        assert_eq!(
+            TimeDiff::to_diff(String::from("-10s"))
+                .locale(String::from("en-US"))
+                .unwrap()
+                .parse(),
+            Ok(String::from("a few seconds ago"))
+        )
+    }
+
+    #[test]
     fn it_works_zh_cn() {
         assert_eq!(
             TimeDiff::to_diff(String::from("-10s"))
@@ -93,10 +112,40 @@ mod tests {
     }
 
     #[test]
+    fn it_works_ru_ru() {
+        assert_eq!(
+            TimeDiff::to_diff(String::from("-10s"))
+                .locale(String::from("ru-RU"))
+                .unwrap()
+                .parse(),
+            Ok(String::from("несколько секунд назад"))
+        )
+    }
+
+    #[test]
+    fn it_works_tr_tr() {
+        assert_eq!(
+            TimeDiff::to_diff(String::from("-10s"))
+                .locale(String::from("tr-TR"))
+                .unwrap()
+                .parse(),
+            Ok(String::from("birkaç saniye önce"))
+        )
+    }
+
+    #[test]
     fn time_diff_invalid_locale() {
         assert_eq!(
             TimeDiff::to_diff(String::from("10day")).locale(String::from("unknown")),
             Err(Error::NotFoundLocale(String::from("unknown")))
+        )
+    }
+
+    #[test]
+    fn time_diff_with_duration() {
+        assert_eq!(
+            TimeDiff::to_diff_duration(Duration::new(30 * 60, 0)).parse(),
+            Ok(String::from("in 30 minutes"))
         )
     }
 }
