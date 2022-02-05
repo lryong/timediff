@@ -1,6 +1,6 @@
 //!  Rust library for printing human readable, relative time differences
 //!
-//! timediff is a Rust package for printing human readable, relative time differences.
+//! `timediff` is a Rust package for printing human readable, relative time differences.
 //! Output is based on [ranges defined in the Day.js] Javascript library, and can be
 //! customized if needed.
 //!
@@ -13,7 +13,7 @@
 mod locale;
 mod timediff;
 
-pub use self::timediff::TimeDiff;
+pub use self::timediff::{Error as TimeDiffError, TimeDiff};
 
 #[cfg(test)]
 mod tests {
