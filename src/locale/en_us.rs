@@ -14,28 +14,28 @@ pub fn format_duration(
                     return Ok("a minute ago".to_string());
                 }
                 x if x <= 44 * 60 => {
-                    let m = x as f32 / 60 as f32;
+                    let m = x as f32 / 60_f32;
                     return Ok(format!("{:.0} minutes ago", m.ceil()));
                 }
                 x if x <= 89 * 60 => {
                     return Ok("an hour ago".to_string());
                 }
                 x if x <= 21 * 60 * 60 => {
-                    let h = x as f32 / 60 as f32 / 60 as f32;
+                    let h = x as f32 / 60_f32 / 60_f32;
                     return Ok(format!("{:.0} hours ago", h.ceil()));
                 }
                 x if x <= 35 * 60 * 60 => {
                     return Ok("a day ago".to_string());
                 }
                 x if x <= 25 * 24 * 60 * 60 => {
-                    let d = x as f32 / 24 as f32 / 60 as f32 / 60 as f32;
+                    let d = x as f32 / 24_f32 / 60_f32 / 60_f32;
                     return Ok(format!("{:.0} days ago", d.ceil()));
                 }
                 x if x <= 45 * 24 * 60 * 60 => {
                     return Ok("a month ago".to_string());
                 }
                 x if x <= 10 * 30 * 24 * 60 * 60 => {
-                    let m = x as f32 / 30 as f32 / 24 as f32 / 60 as f32 / 60 as f32;
+                    let m = x as f32 / 30_f32 / 24_f32 / 60_f32 / 60_f32;
                     return Ok(format!("{:.0} months ago", m));
                 }
                 x if x <= 17 * 30 * 24 * 60 * 60 => {
@@ -43,7 +43,7 @@ pub fn format_duration(
                 }
                 _ => {
                     let y =
-                        v.as_secs_f32() / 12 as f32 / 30 as f32 / 24 as f32 / 60 as f32 / 60 as f32;
+                        v.as_secs_f32() / 12_f32 / 30_f32 / 24_f32 / 60_f32 / 60_f32;
                     return Ok(format!("{:.0} years ago", y));
                 }
             },
@@ -53,45 +53,45 @@ pub fn format_duration(
     match humantime::parse_duration(duration_str) {
         Ok(v) => match v.as_secs() {
             x if x <= 44 => {
-                return Ok("in a few seconds".to_string());
+                Ok("in a few seconds".to_string())
             }
             x if x <= 89 => {
-                return Ok("in a minute".to_string());
+                Ok("in a minute".to_string())
             }
             x if x <= 44 * 60 => {
-                let m = x as f32 / 60 as f32;
+                let m = x as f32 / 60_f32;
                 return Ok(format!("in {:.0} minutes", m.ceil()));
             }
             x if x <= 89 * 60 => {
-                return Ok("in an hour".to_string());
+                Ok("in an hour".to_string())
             }
             x if x <= 21 * 60 * 60 => {
-                let h = x as f32 / 60 as f32 / 60 as f32;
+                let h = x as f32 / 60_f32 / 60_f32;
                 return Ok(format!("in {:.0} hours", h.ceil()));
             }
             x if x <= 35 * 60 * 60 => {
-                return Ok("in a day".to_string());
+                Ok("in a day".to_string())
             }
             x if x <= 25 * 24 * 60 * 60 => {
-                let d = x as f32 / 24 as f32 / 60 as f32 / 60 as f32;
+                let d = x as f32 / 24_f32 / 60_f32 / 60_f32;
                 return Ok(format!("in {:.0} days", d.ceil()));
             }
             x if x <= 45 * 24 * 60 * 60 => {
-                return Ok("in a month".to_string());
+                Ok("in a month".to_string())
             }
             x if x <= 10 * 30 * 24 * 60 * 60 => {
-                let m = x as f32 / 30 as f32 / 24 as f32 / 60 as f32 / 60 as f32;
+                let m = x as f32 / 30_f32 / 24_f32 / 60_f32 / 60_f32;
                 return Ok(format!("in {:.0} months", m));
             }
             x if x <= 17 * 30 * 24 * 60 * 60 => {
-                return Ok("in a year".to_string());
+                Ok("in a year".to_string())
             }
             _ => {
-                let y = v.as_secs_f32() / 12 as f32 / 30 as f32 / 24 as f32 / 60 as f32 / 60 as f32;
+                let y = v.as_secs_f32() / 12_f32 / 30_f32 / 24_f32 / 60_f32 / 60_f32;
                 return Ok(format!("in {:.0} years", y));
             }
         },
-        Err(e) => return Err(e),
+        Err(e) => Err(e),
     }
 }
 

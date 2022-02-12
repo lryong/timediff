@@ -116,19 +116,19 @@ impl TimeDiff {
     /// assert_eq!(TimeDiff::to_diff(String::from("-10s")).parse(),Ok(String::from("a few seconds ago")))
     /// ```
     pub fn parse(&mut self) -> Result<String, DurationError> {
-        let c = self.to.find("-").unwrap_or(self.to.len());
+        let c = self.to.find('-').unwrap_or(self.to.len());
         if c == 0 {
             self.before_current_ts = true;
             self.to = self.to[1..].to_string();
         }
 
         match self.locale.as_str() {
-            "zh-CN" => return zh_cn::format_duration(self.before_current_ts, &self.to),
-            "tr-TR" => return tr_tr::format_duration(self.before_current_ts, &self.to),
-            "ru-RU" => return ru_ru::format_duration(self.before_current_ts, &self.to),
-            "en-US" => return en_us::format_duration(self.before_current_ts, &self.to),
+            "zh-CN" => zh_cn::format_duration(self.before_current_ts, &self.to),
+            "tr-TR" => tr_tr::format_duration(self.before_current_ts, &self.to),
+            "ru-RU" => ru_ru::format_duration(self.before_current_ts, &self.to),
+            "en-US" => en_us::format_duration(self.before_current_ts, &self.to),
 
-            _ => return en_us::format_duration(self.before_current_ts, &self.to),
+            _ => en_us::format_duration(self.before_current_ts, &self.to),
         }
     }
 }
