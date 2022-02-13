@@ -8,7 +8,7 @@ keywords = ["time", "parser", "duration", "diff", "datetime"]
 homepage = "https://github.com/lryong/timediff"
 repository = "https://github.com/lryong/timediff"
 authors = ["Herbert Lu <15816537946@163.com>"]
-version = "0.2.1"
+version = "0.2.2"
 edition = "2021"
 categories = ["date-and-time"]
 
