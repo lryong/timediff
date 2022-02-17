@@ -100,7 +100,7 @@ impl TimeDiff {
     ///
     pub fn locale(&mut self, l: String) -> Result<&mut Self, Error> {
         match l.as_str() {
-            "zh-CN" | "ru-RU" | "tr-TR" | "en-US" => self.locale = l,
+            "zh-CN" | "ru-RU" | "tr-TR" | "en-US" | "de-DE" => self.locale = l,
             _ => return Err(Error::NotFoundLocale(l)),
         }
 
@@ -123,10 +123,11 @@ impl TimeDiff {
         }
 
         match self.locale.as_str() {
+            "en-US" => en_us::format_duration(self.before_current_ts, &self.to),
             "zh-CN" => zh_cn::format_duration(self.before_current_ts, &self.to),
+            "de-DE" => de_de::format_duration(self.before_current_ts, &self.to),
             "tr-TR" => tr_tr::format_duration(self.before_current_ts, &self.to),
             "ru-RU" => ru_ru::format_duration(self.before_current_ts, &self.to),
-            "en-US" => en_us::format_duration(self.before_current_ts, &self.to),
 
             _ => en_us::format_duration(self.before_current_ts, &self.to),
         }

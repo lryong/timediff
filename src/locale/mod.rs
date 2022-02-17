@@ -1,4 +1,4 @@
-mod de_de;
+pub mod de_de;
 pub mod en_us;
 mod es_mx;
 mod hi_in;
