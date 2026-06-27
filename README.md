@@ -4,47 +4,31 @@
 [![docs.rs](https://docs.rs/timediff/badge.svg)](https://docs.rs/timediff)
 [![license](https://img.shields.io/crates/l/timediff.svg)](https://github.com/lryong/timediff/blob/main/LICENSE)
 
-Human-friendly relative time for Rust, based on Day.js-inspired thresholds.
+Human-friendly relative time for Rust, with Day.js-inspired thresholds.
 
-`timediff` turns duration strings and `std::time::Duration` values into UI-friendly copy such as `a minute ago`, `in 2 hours`, or `几秒前`.
-It is intentionally small, focused, and easy to drop into applications that need readable relative-time text without pulling in a large date-time toolkit.
+`timediff` turns duration strings and `std::time::Duration` values into UI-friendly copy such as `a minute ago`, `in 2 hours`, and `几秒前`.
+It stays intentionally small so Rust services can match product-facing relative-time wording without adopting a full date-time toolkit.
 
-## Why timediff?
+## At A Glance
 
-- Day.js-inspired threshold behavior for product copy that feels familiar to frontend teams
-- Works with both duration strings and `std::time::Duration`
-- Produces natural relative-time phrases for past and future timestamps
-- Includes built-in locale support for common product-facing languages
-- Keeps scope small and dependency surface light
+- Day.js-inspired threshold behavior that feels familiar to frontend teams
+- Accepts both duration strings like `-90s` and `std::time::Duration`
+- Formats past and future values with natural product copy
+- Includes built-in locale support for common UI-facing languages
+- Keeps the dependency surface light and the API intentionally small
 
-## When timediff is a good fit
+## Quick Start
 
-- You want relative time like `2 minutes ago` or `in a month`
-- You already use Day.js semantics in the frontend and want similar wording on the backend
-- You need a small crate focused on readable relative-time output
-- You want simple locale switching without designing a formatting system from scratch
-
-## When timediff is not the best fit
-
-- You need a full date-time toolkit
-- You need calendar-aware month and year arithmetic
-- You need `chrono` or `time` integrations in the public API today
-- You want a highly configurable formatter with many output modes right now
-
-## Install
+### Install
 
 ```toml
 [dependencies]
 timediff = "0.2.3"
 ```
 
-Or use:
-
 ```bash
 cargo add timediff
 ```
-
-## Quick Start
 
 ### Format a duration string
 
@@ -78,10 +62,41 @@ diff.locale(String::from("zh-CN")).unwrap();
 assert_eq!(diff.parse().unwrap(), "几秒前");
 ```
 
+## Why timediff
+
+`timediff` is designed for the narrow but common case where you already know the duration and only need clean relative-time text.
+It is a good fit when you want backend output to align more closely with Day.js-style product copy instead of exposing raw durations or adopting a broader time stack.
+
+## Choose timediff when
+
+- You want relative time like `2 minutes ago` or `in a month`
+- You already use Day.js semantics in the frontend and want similar wording on the backend
+- You need a focused crate for readable relative-time output
+- You want simple locale switching without designing a formatter from scratch
+
+## Skip timediff when
+
+- You need a full date-time toolkit
+- You need calendar-aware month or year arithmetic
+- You need `chrono` or `time` integration in the public API today
+- You want many formatting modes or highly configurable output right now
+
+## Supported Locales
+
+The current public API supports these locales:
+
+| Locale | Example for `-10s` |
+| --- | --- |
+| `en-US` | `a few seconds ago` |
+| `zh-CN` | `几秒前` |
+| `de-DE` | `vor ein paar Sekunden` |
+| `ru-RU` | `несколько секунд назад` |
+| `tr-TR` | `birkaç saniye önce` |
+
 ## Why not just use `timeago`?
 
-`timeago` is a strong crate and already has broader ecosystem recognition.
-`timediff` is a better fit when you specifically want a smaller crate with Day.js-inspired threshold behavior and direct support for both duration strings and `std::time::Duration`.
+`timeago` is a solid crate with broader recognition.
+`timediff` is the better fit when you specifically want Day.js-inspired threshold behavior, direct support for duration-string input, and a smaller product-copy-focused API.
 
 | Need | Prefer `timediff` | Prefer `timeago` |
 | --- | --- | --- |
@@ -95,12 +110,12 @@ assert_eq!(diff.parse().unwrap(), "几秒前");
 
 The current API is intentionally small:
 
-- `TimeDiff::to_diff(String)` for human-readable duration strings such as `-10s` or `2h`
-- `TimeDiff::to_diff_duration(Duration)` for `std::time::Duration`
-- `.locale(String)` to switch locale
-- `.parse()` to generate the final relative-time string
-
-Example:
+| API | Purpose |
+| --- | --- |
+| `TimeDiff::to_diff(String)` | Accept a human-readable duration string such as `-10s` or `2h` |
+| `TimeDiff::to_diff_duration(Duration)` | Accept `std::time::Duration` directly |
+| `.locale(String)` | Switch locale before formatting |
+| `.parse()` | Generate the final relative-time string |
 
 ```rust
 use timediff::TimeDiff;
@@ -110,18 +125,6 @@ diff.locale(String::from("en-US")).unwrap();
 
 assert_eq!(diff.parse().unwrap(), "10 minutes ago");
 ```
-
-## Supported Locales
-
-The current public API supports these locales:
-
-| Locale | Status |
-| --- | --- |
-| `en-US` | Supported |
-| `zh-CN` | Supported |
-| `de-DE` | Supported |
-| `ru-RU` | Supported |
-| `tr-TR` | Supported |
 
 ## Design Principles
 
@@ -133,27 +136,27 @@ The current public API supports these locales:
 
 ## Scope And Status
 
-`timediff` is stable in scope and intentionally focused on one job: formatting relative time from duration inputs.
+`timediff` is intentionally focused on one job: formatting relative time from duration inputs.
 
-Current scope includes:
+Current scope:
 
-- human-readable relative-time output
+- Human-readable relative-time output
 - `std::time::Duration` support
-- locale switching
-- threshold behavior based on ranges defined by [Day.js](https://day.js.org/docs/en/display/from-now)
+- Locale switching
+- Threshold behavior based on [Day.js](https://day.js.org/docs/en/display/from-now)
 
-Current non-goals for the public API include:
+Not in scope yet:
 
-- full date-time handling
-- calendar-accurate month calculations
+- Full date-time handling
+- Calendar-accurate month calculations
 - `chrono` integration
 - `time` crate integration
-- custom threshold presets
+- Custom threshold presets
 
 ## Reference Output
 
-The following examples show default output behavior.
-These values come from the current test suite and are useful as a quick threshold reference.
+The following examples reflect the current default output behavior from the test suite.
+Use them as a quick threshold reference.
 
 ```text
 -864000h   100 years ago
