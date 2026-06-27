@@ -1,2 +1,10 @@
 /target
 Cargo.lock
+
+# Local collaboration docs
+ROADMAP.md
+TODO.md
+WORKLOG.md
+PLAN.local.md
+NOTES.local.md
+*.local.md
