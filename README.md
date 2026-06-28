@@ -9,6 +9,14 @@ Human-friendly relative time for Rust, with Day.js-inspired thresholds.
 `timediff` turns duration strings and `std::time::Duration` values into UI-friendly copy such as `a minute ago`, `in 2 hours`, and `几秒前`.
 It stays intentionally small so Rust services can match product-facing relative-time wording without adopting a full date-time toolkit.
 
+## Release Notes
+
+### v0.2.3: README polish release
+
+- Aligns the crates.io package copy with the README tagline and Day.js-inspired positioning
+- Clarifies the quick start path for duration strings, `std::time::Duration`, and locale switching
+- Documents the currently supported locales and the intentionally small public API surface
+
 ## At A Glance
 
 - Day.js-inspired threshold behavior that feels familiar to frontend teams
@@ -237,5 +245,4 @@ See [LICENSE](https://github.com/lryong/timediff/blob/main/LICENSE) for details.
 ## Credits
 
 - Inspired by [mergestat/timediff](https://github.com/mergestat/timediff)
-
 

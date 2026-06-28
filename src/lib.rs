@@ -1,8 +1,9 @@
-//!  Rust library for printing human readable, relative time differences
+//! Day.js-inspired relative time for Rust with locale-aware UI copy.
 //!
-//! `timediff` is a Rust package for printing human readable, relative time differences.
-//! Output is based on [ranges defined in the Day.js] Javascript library, and can be
-//! customized if needed.
+//! `timediff` formats duration strings and `std::time::Duration` values into
+//! human-friendly output such as `a minute ago`, `in 2 hours`, and `几秒前`.
+//! The crate stays intentionally small so services can reuse product-facing
+//! relative-time wording without adopting a broader date-time toolkit.
 //!
 //! [ranges defined in the Day.js]: https://day.js.org/docs/en/display/from-now
 

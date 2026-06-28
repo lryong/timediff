@@ -1,12 +1,12 @@
 [package]
 name = "timediff"
-description = """
-    🦀 Rust library for printing human readable, relative time differences 
-"""
+description = "Day.js-inspired relative time for Rust with locale-aware UI copy."
 license = "MIT"
-keywords = ["time", "parser", "duration", "diff", "datetime"]
+keywords = ["relative-time", "dayjs", "duration", "locale", "humanize"]
 homepage = "https://github.com/lryong/timediff"
 repository = "https://github.com/lryong/timediff"
+documentation = "https://docs.rs/timediff"
+readme = "README.md"
 authors = ["Herbert Lu <15816537946@163.com>"]
 version = "0.2.3"
 edition = "2021"
